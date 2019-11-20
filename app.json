@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "assistant-isa",
+    "name": "ISA",
     "slug": "isaassistant",
     "privacy": "public",
     "sdkVersion": "35.0.0",
@@ -15,7 +15,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#9400D3"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
