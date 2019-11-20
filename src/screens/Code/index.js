@@ -1,48 +1,101 @@
-import React, { useState, useEffect } from 'react'
-import { View } from 'react-native'
-import { 
-   Container,
-   Input,
-   LabelInput,
-   Button,
-   TextButton
-
-} from './styles'
-
+import React, { Component } from 'react';
+import { View, TextInput,Text, ScrollView,Image,Button, Animated,TouchableOpacity, Keyboard, KeyboardAvoidingView,Platform } from 'react-native';
+import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from './styles';
+import right from '../../../assets/images/arrow-right.png'
 import colors from '../../styles/colors'
+import mute from '../../../assets/images/mute.png'
 
 
-export default function Code({ navigation }) {
-   const [lawCode, setLawCode] = useState("")
+class Code extends Component {
 
-
-   handleLawCode = event => {
-      setLawCode(event.target.value);
+   static navigationOptions = {
+         headerStyle: {
+            backgroundColor: colors.purple
+         },
+         headerRight: () => (
+            <TouchableOpacity>
+               <Image source={mute} style={{ height: 20, width: 20, marginRight: 50, }} />
+            </TouchableOpacity>
+          ),
+     
    }
 
-   return (
-      <Container>
-         <LabelInput>Qual Codigo voce quer?</LabelInput>
+  constructor(props) {
+    super(props);
+    this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
+  }
 
-            <View style={{ borderBottomColor: colors.white, borderBottomWidth: 5,}}>
-               <Input 
-                  keyboardType="number-pad"
-                  autoCapitalize="none"
-                  value={lawCode}
-                  onChange={handleLawCode}
-               />
-            </View>
-            
-         <Button onPress={() => navigation.navigate("ArticleScreen", { idCode: lawCode }) }>
-            <TextButton>Proximo</TextButton>
-         </Button>
-      </Container>
-   )
-}
+  componentWillMount() {
+   if (Platform.OS=='ios'){
+    this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+    this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+   }
+   
+   else{
+    this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+    this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+   }
+
+  }
+
+  componentWillUnmount() {
+    this.keyboardWillShowSub.remove();
+    this.keyboardWillHideSub.remove();
+  }
+
+  keyboardWillShow = (event) => {
+    Animated.timing(this.imageHeight, {
+      duration: event.duration,
+      toValue: IMAGE_HEIGHT_SMALL,
+    }).start();
+  };
+
+  keyboardWillHide = (event) => {
+    Animated.timing(this.imageHeight, {
+      duration: event.duration,
+      toValue: IMAGE_HEIGHT,
+    }).start();
+  };
 
 
-Code.navigationOptions = {
-   headerStyle: {
-      backgroundColor: colors.purple,
-    },
-}
+  keyboardDidShow = (event) => {
+    Animated.timing(this.imageHeight, {
+      toValue: IMAGE_HEIGHT_SMALL,
+    }).start();
+  };
+
+  keyboardDidHide = (event) => {
+    Animated.timing(this.imageHeight, {
+      toValue: IMAGE_HEIGHT,
+    }).start();
+  };
+
+  render() {
+    return (
+      <View style={{flex:1,backgroundColor:'#9400D3', alignItems:'center'}}>
+       
+       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual codigo voce quer? </Animated.Text>
+       <ScrollView style={{flex:1}}>
+      
+         <KeyboardAvoidingView
+         style={styles.container}
+         behavior="padding"
+         >
+            <TextInput
+               placeholder="Codigo"
+               keyboardType="number-pad"
+               style={styles.input}
+            />
+      </KeyboardAvoidingView>
+      </ScrollView>
+      <View>
+         <TouchableOpacity onPress={() => this.props.navigation.navigate('ArticleScreen')} style={styles.register}>
+            <Text style={styles.textNext}>Proximo</Text><Image source={right} style={{ width: 15, height: 15, }} />
+         </TouchableOpacity>
+      </View>
+      </View>
+    );
+  }
+};
+
+export default Code;

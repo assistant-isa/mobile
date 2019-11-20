@@ -1,43 +1,59 @@
-import styled from 'styled-components/native'
+import { StyleSheet, Dimensions } from 'react-native';
+const window = Dimensions.get('window');
 
 import colors from '../../styles/colors'
-import dimensions from '../../styles/dimensions'
 
-export const Container = styled.View`
-   flex: 1;
-   justify-content: center;
-   background-color: ${colors.purple};
-`
+export const IMAGE_HEIGHT = window.width / 2;
+export const IMAGE_HEIGHT_SMALL = window.width /7;
 
-export const Input = styled.TextInput`
-   color: ${colors.white};
-   font-size: 30px;
-   font-weight: bold;
-   text-align: center;
-   width: ${dimensions.percentDeviceWidth(100)};
-   height: ${dimensions.percentDeviceWidth(10)};
-`
+export default StyleSheet.create({
+  container: {
+    backgroundColor: colors.purple,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  input: {
+    height: 50,
+    backgroundColor: colors.white,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    width: window.width - 30,
+    textAlign: 'center',
+    borderRadius: 10
+  },
+  logo: {
+    height: IMAGE_HEIGHT,
+    resizeMode: 'contain',
+    marginBottom: 20,
+    padding:10,
+    marginTop:20
+  },
+  register:{
+    marginBottom:20, 
+    width:window.width -100,
+    alignItems:'center',
+    justifyContent:'center',
+    height:50,
+    backgroundColor: '#360445',
+    flexDirection:  'row',
+    borderRadius: 10
+   },
+   textNext: {
+      color: colors.white,
+      fontSize: 25,
+      fontFamily: "Arial"
 
-export const LabelInput = styled.Text`
-   color: ${colors.white};
-   font-size: 30px;
-   text-align: center;
-   margin-bottom: 20px;
-   font-family: "Arial";
-   font-weight: bold;
-`;
+   },
+   textTitle: {
+      fontSize: 25,
+      color: colors.white,
+      resizeMode: 'contain',
+      marginBottom: 20,
+      padding:10,
+      marginTop:20,
+      fontFamily: "Arial",
+      fontWeight: 'bold'
 
-
-export const Button = styled.TouchableOpacity`
-   width: ${dimensions.percentDeviceWidth(100)};
-   height: ${dimensions.percentDeviceHeight(10)};
-   background-color: ${colors.black};
-   justify-content: center;
-   align-items: center;
-   margin-top: 50px;
-`
-
-export const TextButton = styled.Text`
-   font-size: 30px;
-   color: ${colors.white};
-`
+   }
+});

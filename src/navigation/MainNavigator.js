@@ -22,7 +22,7 @@ const HomeStack = createStackNavigator({
 
 }, 
 {
-   initialRouteName: "LawScreen",
+   initialRouteName: "CodeScreen",
    
 })
 
