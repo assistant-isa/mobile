@@ -42,7 +42,7 @@ export default StyleSheet.create({
    textNext: {
       color: colors.white,
       fontSize: 25,
-      fontFamily: "Arial"
+      //fontFamily: "Arial"
 
    },
    textTitle: {
@@ -52,7 +52,7 @@ export default StyleSheet.create({
       marginBottom: 20,
       padding:10,
       marginTop:20,
-      fontFamily: "Arial",
+      //fontFamily: "Arial",
       fontWeight: 'bold'
 
    }

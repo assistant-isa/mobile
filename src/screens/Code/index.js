@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, TextInput,Text, ScrollView,Image,Button, Animated,TouchableOpacity, Keyboard, KeyboardAvoidingView,Platform } from 'react-native';
+import { View, AsyncStorage, TextInput,Text, ScrollView,Image,Button, Animated,TouchableOpacity, Keyboard, KeyboardAvoidingView,Platform } from 'react-native';
 import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from './styles';
 import right from '../../../assets/images/arrow-right.png'
 import colors from '../../styles/colors'
 import mute from '../../../assets/images/mute.png'
+
+import * as Speech from 'expo-speech';
 
 
 class Code extends Component {
@@ -13,7 +15,7 @@ class Code extends Component {
             backgroundColor: colors.purple
          },
          headerRight: () => (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={this.onSpeak}>
                <Image source={mute} style={{ height: 20, width: 20, marginRight: 50, }} />
             </TouchableOpacity>
           ),
@@ -23,6 +25,32 @@ class Code extends Component {
   constructor(props) {
     super(props);
     this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
+    this.state = {
+      inputCode: "",
+      textSpeech: "hello"
+    }
+  }
+
+  handleInputChange = (inputCode) => {
+    this.setState({ inputCode });
+    
+  };
+
+  
+  componentDidMount() {
+    Speech.speak("OI");
+  }
+
+
+  onSpeak = () => {
+    Speech.speak("hello", { language: "en", pitch: 1, rate: 1});
+
+  }
+
+
+  submitCode = async () => {
+    this.props.navigation.navigate('ArticleScreen')
+    await AsyncStorage.setItem("@ISA:Code", JSON.stringify(this.state.inputCode))
   }
 
   componentWillMount() {
@@ -85,11 +113,13 @@ class Code extends Component {
                placeholder="Codigo"
                keyboardType="number-pad"
                style={styles.input}
+               value={this.state.inputCode}
+               onChangeText={this.handleInputChange}
             />
       </KeyboardAvoidingView>
       </ScrollView>
       <View>
-         <TouchableOpacity onPress={() => this.props.navigation.navigate('ArticleScreen')} style={styles.register}>
+         <TouchableOpacity onPress={this.submitCode} style={styles.register}>
             <Text style={styles.textNext}>Proximo</Text><Image source={right} style={{ width: 15, height: 15, }} />
          </TouchableOpacity>
       </View>

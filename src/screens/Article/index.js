@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, TextInput,Text, ScrollView,Image,Button, Animated,TouchableOpacity, Keyboard, KeyboardAvoidingView,Platform } from 'react-native';
+import { View, AsyncStorage, TextInput,Text, ScrollView,Image,Button, Animated,TouchableOpacity, Keyboard, KeyboardAvoidingView,Platform } from 'react-native';
 import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from './styles';
 import right from '../../../assets/images/arrow-right.png'
 import colors from '../../styles/colors'
 import mute from '../../../assets/images/mute.png'
+
 
 
 class Article extends Component {
@@ -23,6 +24,21 @@ class Article extends Component {
   constructor(props) {
     super(props);
     this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
+    this.state = {
+      inputCode: ""
+    }
+  }
+
+  handleInputChange = (inputCode) => {
+    this.setState({ inputCode });
+    
+  };
+  
+
+  submitCode = async () => {
+    
+    this.props.navigation.navigate('LawScreen')
+    await AsyncStorage.setItem("@ISA:Article", JSON.stringify(this.state.inputCode))
   }
 
   componentWillMount() {
@@ -74,7 +90,7 @@ class Article extends Component {
     return (
       <View style={{flex:1,backgroundColor:'#9400D3', alignItems:'center'}}>
        
-       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual artigo voce quer ver? </Animated.Text>
+       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual codigo voce quer? </Animated.Text>
        <ScrollView style={{flex:1}}>
       
          <KeyboardAvoidingView
@@ -85,12 +101,14 @@ class Article extends Component {
                placeholder="Artigo"
                keyboardType="number-pad"
                style={styles.input}
+               value={this.state.inputCode}
+               onChangeText={this.handleInputChange}
             />
       </KeyboardAvoidingView>
       </ScrollView>
       <View>
-         <TouchableOpacity onPress={() => this.props.navigation.navigate('LawScreen')} style={styles.register}>
-            <Text style={styles.textNext}>Consultar</Text><Image source={right} style={{ width: 15, height: 15, }} />
+         <TouchableOpacity onPress={this.submitCode} style={styles.register}>
+            <Text style={styles.textNext}>Proximo</Text><Image source={right} style={{ width: 15, height: 15, }} />
          </TouchableOpacity>
       </View>
       </View>
