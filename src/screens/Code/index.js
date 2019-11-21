@@ -38,13 +38,7 @@ class Code extends Component {
 
   
   componentDidMount() {
-    Speech.speak("OI");
-  }
-
-
-  onSpeak = () => {
-    Speech.speak("hello", { language: "en", pitch: 1, rate: 1});
-
+    Speech.speak("Qual Código Voce quer?", { language: "pt-BR", pitch: 1, rate: 1});
   }
 
 

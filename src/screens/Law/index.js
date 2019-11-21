@@ -4,7 +4,6 @@ import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from './styles';
 import left from '../../../assets/images/left.png'
 import colors from '../../styles/colors'
 import mute from '../../../assets/images/mute.png'
-
 import api from '../../services/api'
 
 import * as Speech from 'expo-speech';
@@ -16,7 +15,7 @@ class Law extends Component {
             backgroundColor: colors.purple
          },
          headerRight: () => (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => Speech.stop()}>
                <Image source={mute} style={{ height: 20, width: 20, marginRight: 50, }} />
             </TouchableOpacity>
           )
@@ -27,6 +26,7 @@ class Law extends Component {
     this.imageHeight = new Animated.Value(IMAGE_HEIGHT),
     this.state = {
       law: [],
+      onSpeak: ""
     }
   }
 
@@ -61,16 +61,18 @@ class Law extends Component {
     const article = await JSON.parse(getIdArticle)
 
     const response = await api.get(`?codigo=${code}&artigo=${article}&parte=0`)
-    this.setState ({ law: response.data })
+    console.tron.log( " RESPONSE ", response.data.artigoTexto )
+    console.log( " RESPONSE ", response.data[0].artigoTexto )
+    this.setState ({ law: response.data, onSpeak: response.data.artigoTexto })
 
-    this.getVoice()
-
-
+    Speech.speak(response.data[0].nomeCodigo, { language: "pt-BR"});
+    Speech.speak(response.data[0].artigoTexto, { language: "pt-BR"});
+    
   }
 
-  getVoice = () => {
-    Speech.speak("oi", { language: "pt-BR"});
-    //console.tron.log( " voz ", voz)
+  handleNewCode = () => {
+    Speech.stop()
+    this.props.navigation.navigate('CodeScreen')
   }
 
 
@@ -111,6 +113,7 @@ class Law extends Component {
         law.map(function(item, i){
               return (
               <View style={styles.containerLaw} key={i}>
+                  <Text style={styles.textLaw}>{item.nomeCodigo}</Text>
                   <Text style={styles.textLaw}>{item.artigoTexto}</Text>
               </View>
             );
@@ -118,7 +121,7 @@ class Law extends Component {
         }
       </ScrollView>
       <View>
-         <TouchableOpacity onPress={() => this.props.navigation.navigate('CodeScreen')} style={styles.register}>
+         <TouchableOpacity onPress={this.handleNewCode} style={styles.register}>
             <Image source={left} style={{ width: 15, height: 15, }} /><Text style={styles.textNext}>Consultar outro Artigo ?</Text>
          </TouchableOpacity>
       </View>

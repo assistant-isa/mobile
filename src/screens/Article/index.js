@@ -5,6 +5,8 @@ import right from '../../../assets/images/arrow-right.png'
 import colors from '../../styles/colors'
 import mute from '../../../assets/images/mute.png'
 
+import * as Speech from 'expo-speech';
+
 
 
 class Article extends Component {
@@ -33,6 +35,10 @@ class Article extends Component {
     this.setState({ inputCode });
     
   };
+
+  componentDidMount() {
+    Speech.speak("Qual Artigo Voce quer ver?", { language: "pt-BR", pitch: 1, rate: 1});
+  }
   
 
   submitCode = async () => {
@@ -90,7 +96,7 @@ class Article extends Component {
     return (
       <View style={{flex:1,backgroundColor:'#9400D3', alignItems:'center'}}>
        
-       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual codigo voce quer? </Animated.Text>
+       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual Artigo Voce quer ver? </Animated.Text>
        <ScrollView style={{flex:1}}>
       
          <KeyboardAvoidingView
