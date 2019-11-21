@@ -36,7 +36,7 @@ class Article extends Component {
   };
 
   componentDidMount() {
-    Speech.speak("Qual Artigo Voce quer ver?", { language: "pt-BR", pitch: 1, rate: 1});
+    Speech.speak("Qual artigo você quer ver?", { language: "pt-BR", pitch: 1, rate: 1});
   }
   
 
@@ -95,7 +95,7 @@ class Article extends Component {
     return (
       <View style={{flex:1,backgroundColor:'#9400D3', alignItems:'center'}}>
        
-       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual artigo voce quer ver? </Animated.Text>
+       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual artigo você quer ver? </Animated.Text>
         <ScrollView style={{flex:1}}>
       
          <KeyboardAvoidingView

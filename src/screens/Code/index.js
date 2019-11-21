@@ -39,7 +39,7 @@ class Code extends Component {
 
   
   componentDidMount() {
-    Speech.speak("Qual Código Voce quer?", { language: "pt-BR", pitch: 1, rate: 1});
+    Speech.speak("Qual código você quer?", { language: "pt-BR", pitch: 1, rate: 1});
   }
 
 
@@ -97,7 +97,7 @@ class Code extends Component {
     return (
       <View style={{flex:1,backgroundColor:'#9400D3', alignItems:'center'}}>
        
-       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual código voce quer? </Animated.Text>
+       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual código você quer? </Animated.Text>
        <ScrollView style={{flex:1}}>
       
          <KeyboardAvoidingView

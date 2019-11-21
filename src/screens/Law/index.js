@@ -50,18 +50,14 @@ class Law extends Component {
   async componentDidMount(){
 
     const getCodeLaw = await AsyncStorage.getItem('@ISA:Code')
-    console.tron.log( " CODE LAW ", getCodeLaw )
 
     const getIdArticle = await AsyncStorage.getItem("@ISA:Article")
-    console.tron.log(" ARTICLE LAW ", getIdArticle)
 
     const code = await JSON.parse(getCodeLaw)
 
     const article = await JSON.parse(getIdArticle)
 
     const response = await api.get(`?codigo=${code}&artigo=${article}&parte=0`)
-    console.tron.log( " RESPONSE ", response.data.artigoTexto )
-    console.log( " RESPONSE ", response.data[0].artigoTexto )
     this.setState ({ law: response.data, onSpeak: response.data.artigoTexto })
 
     Speech.speak(response.data[0].nomeCodigo, { language: "pt-BR"});
