@@ -5,7 +5,6 @@ import left from '../../../assets/images/left.png'
 import colors from '../../styles/colors'
 import mute from '../../../assets/images/mute.png'
 import api from '../../services/api'
-
 import * as Speech from 'expo-speech';
 
 class Law extends Component {

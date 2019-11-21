@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, TextInput,Text, ScrollView,Image,Button, Animated,TouchableOpacity, Keyboard, KeyboardAvoidingView,Platform } from 'react-native';
+import { View, YellowBox, AsyncStorage, TextInput,Text, ScrollView,Image,Button, Animated,TouchableOpacity, Keyboard, KeyboardAvoidingView,Platform } from 'react-native';
 import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from './styles';
 import right from '../../../assets/images/arrow-right.png'
 import colors from '../../styles/colors'
 import mute from '../../../assets/images/mute.png'
-
 import * as Speech from 'expo-speech';
+
+YellowBox.ignoreWarnings(['Warning: Failed prop']);
 
 
 class Code extends Component {
@@ -96,7 +97,7 @@ class Code extends Component {
     return (
       <View style={{flex:1,backgroundColor:'#9400D3', alignItems:'center'}}>
        
-       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual codigo voce quer? </Animated.Text>
+       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual código voce quer? </Animated.Text>
        <ScrollView style={{flex:1}}>
       
          <KeyboardAvoidingView
@@ -104,7 +105,7 @@ class Code extends Component {
          behavior="padding"
          >
             <TextInput
-               placeholder="Codigo"
+               placeholder="Código"
                keyboardType="number-pad"
                style={styles.input}
                value={this.state.inputCode}

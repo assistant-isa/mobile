@@ -4,7 +4,6 @@ import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from './styles';
 import right from '../../../assets/images/arrow-right.png'
 import colors from '../../styles/colors'
 import mute from '../../../assets/images/mute.png'
-
 import * as Speech from 'expo-speech';
 
 
@@ -96,8 +95,8 @@ class Article extends Component {
     return (
       <View style={{flex:1,backgroundColor:'#9400D3', alignItems:'center'}}>
        
-       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual Artigo Voce quer ver? </Animated.Text>
-       <ScrollView style={{flex:1}}>
+       <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>Qual artigo voce quer ver? </Animated.Text>
+        <ScrollView style={{flex:1}}>
       
          <KeyboardAvoidingView
          style={styles.container}
@@ -111,7 +110,7 @@ class Article extends Component {
                onChangeText={this.handleInputChange}
             />
       </KeyboardAvoidingView>
-      </ScrollView>
+       </ScrollView>
       <View>
          <TouchableOpacity onPress={this.submitCode} style={styles.register}>
             <Text style={styles.textNext}>Proximo</Text><Image source={right} style={{ width: 15, height: 15, }} />
