@@ -113,7 +113,7 @@ class Law extends Component {
         law.map(function(item, i){
               return (
               <View style={styles.containerLaw} key={i}>
-                  <Text style={styles.textLaw}>{item.nomeCodigo}</Text>
+                  <Text style={styles.titleLaw}>{item.nomeCodigo}</Text>
                   <Text style={styles.textLaw}>{item.artigoTexto}</Text>
               </View>
             );

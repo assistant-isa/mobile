@@ -67,9 +67,12 @@ export default StyleSheet.create({
      color: colors.white,
 
    },
-   TitleLaw: {
+
+
+   titleLaw: {
     fontSize: 20,
     textAlign: 'center',
+    justifyContent: 'center',
     marginBottom: 30,
     color: colors.white,
 
