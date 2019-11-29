@@ -2,6 +2,7 @@
   "expo": {
     "name": "ISA",
     "slug": "isaassistant",
+    "version": "1.0.0",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -25,10 +26,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "br.com.assistantisa"
+      "bundleIdentifier": "br.com.assistantisa",
+      "icon": "./assets/images/logoisa.png"
     },
     "android": {
-      "package": "com.assistantisa"
+      "package": "br.com.assistantisa"
     }
   }
 }
