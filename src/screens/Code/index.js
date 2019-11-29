@@ -28,7 +28,7 @@ class Code extends Component {
     this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
     this.state = {
       inputCode: "",
-      textSpeech: "hello"
+      textSpeech: "hello",
     }
   }
 
@@ -114,7 +114,7 @@ class Code extends Component {
       </KeyboardAvoidingView>
       </ScrollView>
       <View>
-         <TouchableOpacity onPress={this.submitCode} style={styles.register}>
+         <TouchableOpacity disabled={!this.state.inputCode} onPress={this.submitCode} style={styles.register}>
             <Text style={styles.textNext}>Proximo</Text><Image source={right} style={{ width: 15, height: 15, }} />
          </TouchableOpacity>
       </View>
