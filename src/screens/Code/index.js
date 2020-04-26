@@ -12,15 +12,153 @@ import {
   TouchableOpacity,
   Keyboard,
   KeyboardAvoidingView,
-  Platform
+  Platform,
 } from "react-native";
 import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from "./styles";
 import right from "../../../assets/images/arrow-right.png";
 import colors from "../../styles/colors";
 import mute from "../../../assets/images/mute.png";
+import profile from "../../../assets/images/profile.jpg";
 import * as Speech from "expo-speech";
 
+import { MaterialIcons } from "@expo/vector-icons";
+
 YellowBox.ignoreWarnings(["Warning: Failed prop"]);
+
+function Code({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.containerTitle}>
+        <Text style={styles.textTitle}>Escolha um código</Text>
+      </View>
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.scrollView}
+      >
+        <TouchableOpacity
+          onPress={() => navigation.navigate("ArticleScreen")}
+          style={styles.buttonLaw}
+        >
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>Constituição Federal</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Consolidação das Leis do Trabalho
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonLaw}>
+          <Text style={styles.textButtonLaw}>
+            Código de Transito Brasileiro
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
+  );
+}
+
+export default Code;
+
+Code.navigationOptions = {
+  headerStyle: {
+    //backgroundColor: colors.purple,
+    height: 70,
+  },
+  headerRight: () => (
+    <TouchableOpacity>
+      <MaterialIcons
+        name="favorite-border"
+        size={20}
+        style={styles.iconFavorite}
+      />
+    </TouchableOpacity>
+  ),
+
+  headerLeft: () => (
+    <View style={styles.containerHeaderRight}>
+      <TouchableOpacity>
+        <Image source={profile} style={styles.imageProfile} />
+      </TouchableOpacity>
+      <Text style={styles.nameProfile}>Olá, Luis !</Text>
+    </View>
+  ),
+};
+
+/*
 
 class Code extends Component {
   static navigationOptions = {
@@ -154,3 +292,4 @@ class Code extends Component {
 }
 
 export default Code;
+*/
