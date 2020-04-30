@@ -10,6 +10,7 @@ export default StyleSheet.create({
   container: {
     //backgroundColor: colors.purple,
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
   },
 
@@ -41,13 +42,19 @@ export default StyleSheet.create({
     width: window.width - 20,
   },
 
+  containerHeader: {
+    width: window.width - 20,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
   textTitle: {
     fontSize: 25,
     //color: colors.white,
     resizeMode: "contain",
     marginBottom: 20,
     padding: 10,
-    marginTop: 10,
+    marginTop: 70,
     //fontFamily: "Arial",
     fontWeight: "bold",
   },
@@ -67,7 +74,7 @@ export default StyleSheet.create({
     borderRadius: 25,
     height: 50,
     width: 50,
-    marginRight: 20,
+    marginTop: 50,
   },
 
   nameProfile: {
