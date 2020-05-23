@@ -3,9 +3,10 @@ import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import React, { useState } from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
+import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 if (__DEV__) {
@@ -34,6 +35,7 @@ export default function App(props) {
   } else {
     return (
       <NavigationContainer>
+        <StatusBar barStyle="dark-content" />
         <AppContainer />
       </NavigationContainer>
     );

@@ -18,7 +18,7 @@ import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from "./styles";
 import right from "../../../assets/images/arrow-right.png";
 import colors from "../../styles/colors";
 import mute from "../../../assets/images/mute.png";
-import profile from "../../../assets/images/profile.jpg";
+import profile from "../../../assets/images/pp.jpeg";
 import * as Speech from "expo-speech";
 
 import { MaterialIcons } from "@expo/vector-icons";
@@ -28,6 +28,13 @@ YellowBox.ignoreWarnings(["Warning: Failed prop"]);
 function Code({ navigation }) {
   return (
     <View style={styles.container}>
+      <TouchableOpacity>
+        <View style={styles.containerHeader}>
+          <Image source={profile} style={styles.imageProfile} />
+          <Text style={styles.textTitle}>Bem vindo, Adriano!</Text>
+        </View>
+      </TouchableOpacity>
+
       <View style={styles.containerTitle}>
         <Text style={styles.textTitle}>Escolha um código</Text>
       </View>

@@ -6,6 +6,7 @@ import Law from "../screens/Law";
 import Code from "../screens/Code";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
+import Profile from "../screens/Profile";
 
 const Stack = createStackNavigator();
 
