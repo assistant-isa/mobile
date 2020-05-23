@@ -1,152 +1,49 @@
-import React, { Component } from "react";
-import {
-  View,
-  AsyncStorage,
-  TextInput,
-  Text,
-  ScrollView,
-  Image,
-  Button,
-  Animated,
-  TouchableOpacity,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform
-} from "react-native";
+import React, { useEffect, useState, useMemo } from "react";
+import { View, Text, FlatList } from "react-native";
 import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from "./styles";
-import right from "../../../assets/images/arrow-right.png";
-import colors from "../../styles/colors";
-import mute from "../../../assets/images/mute.png";
-import * as Speech from "expo-speech";
+import SearchBar from "react-native-searchbar";
+import Highlighter from "react-native-highlight-words";
 
-class Article extends Component {
-  static navigationOptions = {
-    headerStyle: {
-      backgroundColor: colors.purple
-    },
-    headerRight: () => (
-      <TouchableOpacity>
-        <Image
-          source={mute}
-          style={{ height: 20, width: 20, marginRight: 50 }}
-        />
-      </TouchableOpacity>
-    )
-  };
+import axios from "axios";
 
-  constructor(props) {
-    super(props);
-    this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
-    this.state = {
-      inputCode: ""
-    };
-  }
+export default function Article() {
+  const [articles, setArticles] = useState([]);
 
-  handleInputChange = inputCode => {
-    this.setState({ inputCode });
-  };
-
-  componentDidMount() {
-    Speech.speak("Qual artigo você quer ver?", {
-      language: "pt-BR",
-      pitch: 1,
-      rate: 1
-    });
-  }
-
-  submitCode = async () => {
-    this.props.navigation.navigate("LawScreen");
-    await AsyncStorage.setItem(
-      "@ISA:Article",
-      JSON.stringify(this.state.inputCode)
-    );
-  };
-
-  componentWillMount() {
-    if (Platform.OS == "ios") {
-      this.keyboardWillShowSub = Keyboard.addListener(
-        "keyboardWillShow",
-        this.keyboardWillShow
+  useEffect(() => {
+    async function getArticle() {
+      const response = await axios.get(
+        "https://testando2000.000webhostapp.com/CHECKLIST/_ISA.php/buscarArtigo?codigo=24&artigo=0&parte=0"
       );
-      this.keyboardWillHideSub = Keyboard.addListener(
-        "keyboardWillHide",
-        this.keyboardWillHide
-      );
-    } else {
-      this.keyboardWillShowSub = Keyboard.addListener(
-        "keyboardDidShow",
-        this.keyboardDidShow
-      );
-      this.keyboardWillHideSub = Keyboard.addListener(
-        "keyboardDidHide",
-        this.keyboardDidHide
-      );
+
+      setArticles(response.data);
     }
+
+    getArticle();
+  }, []);
+
+  function _handleResults(results) {
+    setArticles(results);
   }
 
-  componentWillUnmount() {
-    this.keyboardWillShowSub.remove();
-    this.keyboardWillHideSub.remove();
-  }
+  return (
+    <View style={{ flex: 1 }}>
+      <SearchBar data={articles} handleResults={_handleResults} showOnLoad />
 
-  keyboardWillShow = event => {
-    Animated.timing(this.imageHeight, {
-      duration: event.duration,
-      toValue: IMAGE_HEIGHT_SMALL
-    }).start();
-  };
-
-  keyboardWillHide = event => {
-    Animated.timing(this.imageHeight, {
-      duration: event.duration,
-      toValue: IMAGE_HEIGHT
-    }).start();
-  };
-
-  keyboardDidShow = event => {
-    Animated.timing(this.imageHeight, {
-      toValue: IMAGE_HEIGHT_SMALL
-    }).start();
-  };
-
-  keyboardDidHide = event => {
-    Animated.timing(this.imageHeight, {
-      toValue: IMAGE_HEIGHT
-    }).start();
-  };
-
-  render() {
-    return (
-      <View
-        style={{ flex: 1, backgroundColor: "#9400D3", alignItems: "center" }}
-      >
-        <Animated.Text style={[styles.textTitle, { height: this.imageHeight }]}>
-          Qual artigo você quer ver?{" "}
-        </Animated.Text>
-        <ScrollView style={{ flex: 1 }}>
-          <KeyboardAvoidingView style={styles.container} behavior="padding">
-            <TextInput
-              placeholder="Artigo"
-              keyboardType="number-pad"
-              style={styles.input}
-              value={this.state.inputCode}
-              onChangeText={this.handleInputChange}
+      <FlatList
+        style={{ marginTop: 120 }}
+        data={articles.slice(0, 3)}
+        renderItem={({ item }) => (
+          <View>
+            <Highlighter
+              highlightStyle={{ backgroundColor: "yellow" }}
+              searchWords={["lei", "posterior", "Não"]}
+              textToHighlight={item.artigoInalterado}
             />
-          </KeyboardAvoidingView>
-        </ScrollView>
-        <View>
-          <TouchableOpacity
-            disabled={!this.state.inputCode}
-            onPress={this.submitCode}
-            style={styles.register}
-          >
-            <Text style={styles.textNext}>Proximo</Text>
-            <Image source={right} style={{ width: 15, height: 15 }} />
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
+            {/* <Text>{item.artigoInalterado}</Text> */}
+          </View>
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
+  );
 }
-
-export default Article;

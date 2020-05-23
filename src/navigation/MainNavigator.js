@@ -12,9 +12,13 @@ const Stack = createStackNavigator();
 export default function AppContainer() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Article"
+        component={Article}
+      />
       <Stack.Screen name="Code" component={Code} />
-      {/* <Stack.Screen name="Article" component={Article} />
-      <Stack.Screen name="Law" component={Law} /> */}
+      <Stack.Screen name="Law" component={Law} />
     </Stack.Navigator>
   );
 }
